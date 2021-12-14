@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Categoria } from '../models/categoria';
 import { Vacante } from '../models/vacante';
 
 @Injectable({
@@ -14,5 +15,13 @@ export class VacanteService {
 
   getVacantesHome(): Observable<Vacante[]>{
     return this.http.get<Vacante[]>(this.urlEndpoint + "/home");
+  }
+
+  getCategorias(): Observable<Categoria[]>{
+    return this.http.get<Categoria[]>(this.urlEndpoint + "/categorias");
+  }
+
+  getVacante(id: number): Observable<Vacante>{
+    return this.http.get<Vacante>(`${this.urlEndpoint}/home/verDetalle/${id}`)
   }
 }

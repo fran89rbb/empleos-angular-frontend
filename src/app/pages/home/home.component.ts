@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Categoria } from 'src/app/models/categoria';
 import { Vacante } from 'src/app/models/vacante';
 import { VacanteService } from 'src/app/services/vacante.service';
 

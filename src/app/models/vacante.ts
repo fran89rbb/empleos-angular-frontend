@@ -1,3 +1,5 @@
+import { Categoria } from "./categoria";
+
 export class Vacante {
     nombre: string;
     descripcion: string;
@@ -7,5 +9,5 @@ export class Vacante {
     destacado: number;
     imagen: string;
     detalles: string;
-    categoria: string;
+    categoria: Categoria;
 }
