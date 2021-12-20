@@ -1,6 +1,7 @@
 import { Categoria } from "./categoria";
 
 export class Vacante {
+    id: number;
     nombre: string;
     descripcion: string;
     fecha: string;

@@ -9,6 +9,9 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { VerDetalleComponent } from './pages/ver-detalle/ver-detalle.component';
+import { VacantesComponent } from './pages/vacantes/vacantes.component';
+import { FormComponent } from './pages/vacantes/form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,13 +20,16 @@ import { VerDetalleComponent } from './pages/ver-detalle/ver-detalle.component';
     FooterComponent,
     HomeComponent,
     AboutComponent,
-    VerDetalleComponent
+    VerDetalleComponent,
+    VacantesComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
