@@ -25,6 +25,7 @@
                 <div class="form-group">
                   <label for="categoria">Categoría</label>
                   <select [compareWith]="compararCategoria" class="form-control" name="categoria" id="categoria" [(ngModel)]="vacante.categoria">
+                    <option [ngValue]="undefined">--- Seleccione una categoría ---</option>
                     <option *ngFor="let categoria of categorias" [ngValue]="categoria">{{ categoria.nombre }}</option>
                   </select>
                 </div>
@@ -34,6 +35,7 @@
                 <div class="form-group">
                   <label for="estatus">Estatus</label>
                   <select class="form-control" name="estatus" id="estatus" [(ngModel)]="vacante.estatus">
+                    <option [ngValue]="undefined">--- Seleccione una opción ---</option>
                     <option value="Creada">Creada</option>
                     <option value="Aprobada">Aprobada</option>
                     <option value="Eliminada">Eliminada</option>	

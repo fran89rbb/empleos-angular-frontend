@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/models/categoria';
 import { Vacante } from 'src/app/models/vacante';
 import { VacanteService } from 'src/app/services/vacante.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form',
@@ -27,7 +28,11 @@ export class FormComponent implements OnInit {
   create(){
     this._vacanteService.create(this.vacante).subscribe( resp => {
       this.router.navigate(['/vacantes'])
-      console.log(this.vacante);
+      Swal.fire({
+        title: 'Nuevo vacante',
+        text: `La vacante ${resp.nombre} ha sido creada con éxito`,
+        icon: 'success'
+      });
     })
   }
 
@@ -47,6 +52,12 @@ export class FormComponent implements OnInit {
   update(){
     this._vacanteService.update(this.vacante).subscribe( resp => {
       this.router.navigate(['/vacantes'])
+      Swal.fire({
+        title: 'Cliente actualizado',
+        text: `${resp.mensaje}`,
+        icon: 'success'
+      });
+      
     })
   }
 

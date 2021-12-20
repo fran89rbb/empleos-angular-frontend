@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Observable,  throwError } from 'rxjs';
 import { Categoria } from '../models/categoria';
 import { Vacante } from '../models/vacante';
@@ -31,7 +31,7 @@ export class VacanteService {
     .pipe(catchError( e => {
       this.router.navigate(['/home'])
       Swal.fire({
-        title: 'Error al recuperar cliente',
+        title: 'Error al recuperar vacante',
         text: e.error.mensaje,
         icon: 'error'
       })
@@ -44,15 +44,43 @@ export class VacanteService {
   }
 
   create(vacante: Vacante): Observable<Vacante>{
-    return this.http.post<Vacante>(this.urlEndpoint + "/vacantes", vacante, {headers: this.httpHeaders});
+    return this.http.post<Vacante>(this.urlEndpoint + "/vacantes", vacante, {headers: this.httpHeaders})
+      .pipe(
+        (map((resp:any) => resp.vacante as Vacante)),
+        (catchError( e => {
+          Swal.fire({
+            title: e.error.mensaje,
+            text: e.error.error,
+            icon: 'error'
+          });
+        return throwError(e);
+    })));
   }
 
   update(vacante: Vacante): Observable<any>{
     return this.http.put<any>(`${this.urlEndpoint}/vacantes/${vacante.id}`, vacante, {headers: this.httpHeaders})
+    .pipe(catchError( e => {
+      this.router.navigate(['/vacantes'])
+      Swal.fire({
+        title: 'Error al recuperar vacante',
+        text: e.error.mensaje,
+        icon: 'error'
+      });
+      return throwError(e);
+    }))
   }
 
   delete(id: number): Observable<Vacante>{
     return this.http.delete<Vacante>(`${this.urlEndpoint}/vacantes/${id}`)
+    .pipe(catchError( e => {
+      this.router.navigate(['/vacantes'])
+      Swal.fire({
+        title: 'Error al recuperar vacante',
+        text: e.error.mensaje,
+        icon: 'error'
+      });
+      return throwError(e);
+    }))
   }
   
 }
