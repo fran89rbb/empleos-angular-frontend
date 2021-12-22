@@ -15,6 +15,7 @@ export class FormComponent implements OnInit {
 
   vacante: Vacante = new Vacante();
   categorias: Categoria[];
+  errores: String[];
 
   constructor(private _vacanteService: VacanteService, private router: Router, private activatedRdoute: ActivatedRoute) { }
 
@@ -33,7 +34,12 @@ export class FormComponent implements OnInit {
         text: `La vacante ${resp.nombre} ha sido creada con éxito`,
         icon: 'success'
       });
-    })
+    },
+    err => {
+      this.errores = err.error.errors as string[];
+      console.log("Código de error desde el backend: " + err.status);
+    }
+    )
   }
 
   cargarVacante(){
@@ -57,8 +63,12 @@ export class FormComponent implements OnInit {
         text: `${resp.mensaje}`,
         icon: 'success'
       });
-      
-    })
+    },
+    err => {
+      this.errores = err.error.errors as string[];
+      console.log("Código de error desde el backend: " + err.status);
+    }
+    )
   }
 
   compararCategoria(o1: Categoria, o2: Categoria){

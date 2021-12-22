@@ -1,3 +1,9 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+  <li *ngFor="let err of errores">
+      {{ err }}
+  </li>
+</ul>
+
 <main role="main">     
     <hr>
     <div class="container"> 
@@ -45,7 +51,7 @@
               <div class="col-md-3"> 
                 <div class="form-group">
                   <label for="fecha">Fecha de Publicación</label>
-                  <input type="text" class="form-control" name="fecha" id="fecha" [(ngModel)]="vacante.fecha" placeholder="Fecha de publicacion">
+                  <input type="date" class="form-control" name="fecha" id="fecha" [(ngModel)]="vacante.fecha" placeholder="Fecha de publicacion">
                 </div>  
               </div>
               <div class="col-md-3"> 

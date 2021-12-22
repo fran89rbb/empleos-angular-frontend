@@ -48,6 +48,11 @@ export class VacanteService {
       .pipe(
         (map((resp:any) => resp.vacante as Vacante)),
         (catchError( e => {
+
+          if(e.status == 400){
+            return throwError(e);
+          }
+
           Swal.fire({
             title: e.error.mensaje,
             text: e.error.error,
@@ -60,7 +65,11 @@ export class VacanteService {
   update(vacante: Vacante): Observable<any>{
     return this.http.put<any>(`${this.urlEndpoint}/vacantes/${vacante.id}`, vacante, {headers: this.httpHeaders})
     .pipe(catchError( e => {
-      this.router.navigate(['/vacantes'])
+
+      if(e.status == 400){
+        return throwError(e);
+      }
+
       Swal.fire({
         title: 'Error al recuperar vacante',
         text: e.error.mensaje,
